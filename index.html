@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Train Times</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.css" />
+    <link rel="stylesheet" href="style.css" />
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.10.1/firebase.js"></script>
+    <script src="script.js"></script>
+
+</head>
+<body>
+    <!-- .container is main centered wrapper -->
+    <div class="container">
+    
+        
+        <div class="row">
+            <div class="twelve columns">Current Train Schedule</div>
+            <div class="twelve columns">
+                <table>
+                    <th>Train Name</th>
+                    <th>Destination</th>
+                    <th>Frequency (Min)</th>
+                    <th>Next Arrival</th>
+                    <th>Minutes Away</th>
+                </table>
+            </div>
+        </div>
+    
+        
+    
+        <div class="row">
+            <div class="twelve columns">Add Train</div>
+            <div class="twelve columns">
+                <form >
+                    Train Name:
+                    <input type="text">
+                    Destination:
+                    <input type="text">
+                    First Train Time:
+                    <input type="text">
+                    Frequency (min):
+                    <input type="text">
+                    <button type="submit">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    
+</body>
+</html>
