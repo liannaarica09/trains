@@ -18,12 +18,12 @@
 
 var database = firebase.database();
 
+
+
 $("#submit").on("click", function() {
     event.preventDefault();
     
     console.log("submit clicked");
-    var row = $("<tr>");
-    var data = $("<td>");
 
     name = $("#trainName").val().trim();
     destination = $("#destinationIn").val().trim();
@@ -40,19 +40,21 @@ $("#submit").on("click", function() {
         destination: destination,
         frequency: frequency,
         initialTime: initialTime,
+      dateAdded: firebase.database.ServerValue.TIMESTAMP
       });
 
-    database.ref().orderByChild("dateAdded").limitToLast(1).on("child_added", function (snapshot) {
+   });
+
+  database.ref().orderByChild("name").on("child_added", function (snapshot) {
+
+      // $("#infoTable").empty();
       
       var snapVal = snapshot.val();
-
-      console.log(snapVal.name);
-      console.log(snapVal.destination);
-      console.log(snapVal.frequency);
-      console.log(snapVal.initialTime);
+      var row = $("<tr>");
+      var data = $("<td>");
 
       // initialTime (pushed back 1 year to make sure it comes before current time)
-      var initialTimeConverted = moment(initialTime, "HH:mm").subtract(1, "years");
+      var initialTimeConverted = moment(initialTime, "hh:mm").subtract(1, "years");
       console.log(initialTimeConverted);
 
       // Current Time
@@ -79,10 +81,8 @@ $("#submit").on("click", function() {
       row.append("<td>" + snapVal.name + "</td>");
       row.append("<td>" + snapVal.destination + "</td>");
       row.append("<td>" + snapVal.frequency + "</td>");
-      row.append("<td>" + nextTrain + "</td>");
+      row.append("<td>" + moment(nextTrain).format("hh:mm") + "</td>");
       row.append("<td>" + tMinutesTillTrain + "</td>");
 
       $("#infoTable").append(row);
     });
-
-   });
