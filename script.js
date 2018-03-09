@@ -1,8 +1,6 @@
-  var name;
+  var tName;
   var destination;
   var frequency;
-  var next;
-  var min;
   var initialTime;
   
   // Initialize Firebase
@@ -25,18 +23,18 @@ $("#submit").on("click", function() {
     
     console.log("submit clicked");
 
-    name = $("#trainName").val().trim();
+    tName = $("#trainName").val().trim();
     destination = $("#destinationIn").val().trim();
     frequency = $("#frequencyIn").val().trim();
     initialTime = $("#firstTrain").val().trim();
     
-    console.log("name " + name);
+    console.log("name " + tName);
     console.log("destination " + destination);
     console.log("frequency " + frequency);
     console.log("first departure " + initialTime);
 
     database.ref().push({
-        name: name,
+        tName: tName,
         destination: destination,
         frequency: frequency,
         initialTime: initialTime,
@@ -45,13 +43,12 @@ $("#submit").on("click", function() {
 
    });
 
-  database.ref().orderByChild("name").on("child_added", function (snapshot) {
+  database.ref().orderByChild("tName").on("child_added", function (snapshot) {
 
       // $("#infoTable").empty();
       
       var snapVal = snapshot.val();
       var row = $("<tr>");
-      var data = $("<td>");
 
       // initialTime (pushed back 1 year to make sure it comes before current time)
       var initialTimeConverted = moment(initialTime, "hh:mm").subtract(1, "years");
@@ -78,7 +75,7 @@ $("#submit").on("click", function() {
       console.log("ARRIVAL TIME: " + moment(nextTrain).format("hh:mm"));
 
 
-      row.append("<td>" + snapVal.name + "</td>");
+      row.append("<td>" + snapVal.tName + "</td>");
       row.append("<td>" + snapVal.destination + "</td>");
       row.append("<td>" + snapVal.frequency + "</td>");
       row.append("<td>" + moment(nextTrain).format("hh:mm") + "</td>");
